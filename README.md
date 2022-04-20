@@ -1,6 +1,9 @@
 # web_scraping
-Dynamic Web scraper built using Beautiful Soup (Python) 
-Run general_scraping.py : python general_scraping.py
+Dynamic Web scraper built using Beautiful Soup (Python)
+<br>
+
+<h1>Run general_scraping.py : python general_scraping.py</h1>
+<br>
 
 Provide the URL for the website to be scraped.
 The app returns the:
