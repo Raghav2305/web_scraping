@@ -77,15 +77,19 @@ def get_url_content(url):
 
 
 def scrape_tables(url):
-    try:
-        html = get_url_content(url)
-        table = HTMLTableParser()
-        table.feed(str(html))
-        
-        print("\n\nPANDAS DATAFRAME\n")
-        print(pd.DataFrame(table.tables[0]), end="\n", sep="\n")
-    except:
-        print("NO tables were Found")
+    
+    html = get_url_content(url)
+    table = HTMLTableParser()
+    table.feed(str(html))
+    # my_table = pd.DataFrame(table.tables[1])
+    # print(my_table, end="\n", sep="\n")
+    print("\n\nPANDAS DATAFRAME\n")
+    my_table = pd.DataFrame(table.tables[1])
+    print(my_table)
+    file_name = "website_table.xlsx"
+    my_table.to_excel(file_name)
+    print("\nRecords sucessfully scraped and stored ")
+
     
 def scrape_links(soup, url):
     try:
@@ -128,7 +132,8 @@ def scrape_images(soup, url):
     for link in links:
         print(link, end='\n')
 
-url = "https://github.com"
+url = "https://www.moneycontrol.com/india/stockpricequote/refineries/relianceindustries/RI"
+
 
 soup = get_soup(url)
 
