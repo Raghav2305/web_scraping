@@ -21,6 +21,10 @@
 from distutils.log import error
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
+import urllib.request
+from pprint import pprint
+from html_table_parser.parser import HTMLTableParser
 
 headers = {'Accept': 'text/html'}
 
@@ -33,7 +37,8 @@ def get_soup(url):
 def scrape(soup):
     
     title = soup.title
-    print('\033[1m' + f"Title = {title.text}" '\033[0m')
+
+    print('\n\033[1m' + f"Title = {title.text}" '\033[0m')
 
     try:
         paras = soup.find_all('p')
@@ -64,31 +69,53 @@ def scrape(soup):
         h2s = soup.find('h2')
         print('\033[1m' + f"H2 = {h2s.text}" +'\033[0m', end='\n', sep='\n')
 
+def get_url_content(url):
+    req = urllib.request.Request(url=url)
+    open_ = urllib.request.urlopen(req)
+    return open_.read()
 
+
+
+def scrape_tables(url):
+    try:
+        html = get_url_content(url)
+        table = HTMLTableParser()
+        table.feed(str(html))
+        
+        print("\n\nPANDAS DATAFRAME\n")
+        print(pd.DataFrame(table.tables[0]), end="\n", sep="\n")
+    except:
+        print("NO tables were Found")
+    
 def scrape_links(soup, url):
-    anchors = soup.find_all('a')
-    # all_links = set()
-    # for link in anchors:
-    #     if(link.get('href') != '#'): 
-    #         linkText = url +link.get('href')
-    #         all_links.add(link)
-    all_links = []
-    print("\n")
+    try:
+        anchors = soup.find_all('a')
+        # all_links = set()
+        # for link in anchors:
+        #     if(link.get('href') != '#'): 
+        #         linkText = url +link.get('href')
+        #         all_links.add(link)
+        all_links = []
+        print("\n")
 
-    print('\033[1m' + "Links: " +'\033[0m')
-    for linkk in anchors:
-        if linkk['href'].startswith("https://"):
-            all_links.append(linkk['href'])
-        else:
-            all_links.append(url + linkk['href'])
+        print('\033[1m' + "Links: " +'\033[0m')
+        for linkk in anchors:
+            
+            if linkk['href'].startswith("https://"):
+                all_links.append(linkk['href'])
+            else:
+                all_links.append(url + linkk['href'])
 
-    for a_links in all_links:
-        print(a_links, end="\n")
+        for a_links in all_links:
+            print(a_links, end="\n")
+    except:
+        print('----------------------------------------------')
 
 def scrape_images(soup, url):
     image_tags = soup.find_all('img')
     links = []
     for image_tag in image_tags:
+        
         if image_tag['src'].startswith("https://"):
             links.append(image_tag['src'])
         else:
@@ -101,9 +128,12 @@ def scrape_images(soup, url):
     for link in links:
         print(link, end='\n')
 
-url = "https://reactjs.org"
+url = "https://github.com"
+
 soup = get_soup(url)
+
 scrape(soup)
+scrape_tables(url)
 scrape_links(soup, url)
 scrape_images(soup, url)
 # import urllib.request
