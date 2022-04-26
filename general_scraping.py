@@ -25,6 +25,7 @@ import pandas as pd
 import urllib.request
 from pprint import pprint
 from html_table_parser.parser import HTMLTableParser
+import json
 
 headers = {'Accept': 'text/html'}
 
@@ -77,14 +78,18 @@ def get_url_content(url):
 
 
 def scrape_tables(url):
-    
-    html = get_url_content(url)
+    scraped_table = soup.find_all('table')
+    # pprint(scraped_table)
+    # for table in scraped_table:
+    #     print(table.text)
+            
+    # html = get_url_content(url)
     table = HTMLTableParser()
-    table.feed(str(html))
+    table.feed(str(scraped_table))
     # my_table = pd.DataFrame(table.tables[1])
     # print(my_table, end="\n", sep="\n")
     print("\n\nPANDAS DATAFRAME\n")
-    my_table = pd.DataFrame(table.tables[1])
+    my_table = pd.DataFrame(table.tables[4])
     print(my_table)
     file_name = "website_table.xlsx"
     my_table.to_excel(file_name)
@@ -105,7 +110,7 @@ def scrape_links(soup, url):
         print('\033[1m' + "Links: " +'\033[0m')
         for linkk in anchors:
             
-            if linkk['href'].startswith("https://"):
+            if linkk['href'].startswith("https://") :
                 all_links.append(linkk['href'])
             else:
                 all_links.append(url + linkk['href'])
@@ -132,7 +137,8 @@ def scrape_images(soup, url):
     for link in links:
         print(link, end='\n')
 
-url = "https://www.moneycontrol.com/india/stockpricequote/refineries/relianceindustries/RI"
+url = "https://www.moneycontrol.com/"
+# url = "https://reactjs.org"
 
 
 soup = get_soup(url)
