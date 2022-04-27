@@ -29,9 +29,9 @@ from html_table_parser.parser import HTMLTableParser
 import json, os
 
 contents = []
-url = "https://www.moneycontrol.com"
+# url = "https://www.moneycontrol.com"
 # url = "https://replit.org"
-# url = "https://www.codewithharry.com"
+url = "https://www.codewithharry.com"
 # url = "https://stackoverflow.com"
 # url = "https://www.geeksforgeeks.org"
 # url = "https://finance.yahoo.com"
