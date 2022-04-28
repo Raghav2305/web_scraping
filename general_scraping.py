@@ -18,23 +18,25 @@
 # #     print(img)
 
 #Working code
-from distutils.log import error
-from importlib.resources import path
+import sys
+import urllib.request
+
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-import urllib.request
 from pprint import pprint
 from html_table_parser.parser import HTMLTableParser
-import json, os
+import json, os, wget
+# from download_pdf import download_pdf
 
 contents = []
-# url = "https://www.moneycontrol.com"
+url = "https://www.moneycontrol.com"
 # url = "https://replit.org"
-url = "https://www.codewithharry.com"
+# url = "https://www.codewithharry.com"
 # url = "https://stackoverflow.com"
 # url = "https://www.geeksforgeeks.org"
-# url = "https://finance.yahoo.com"
+# url = "http://www.gatsby.ucl.ac.uk/teaching/courses/ml1-2016"
+# url = "https://www.infobooks.org/free-pdf-books/childrens/childrens-story-books"
 
 headers = {'Accept': 'text/html'}
 r = requests.get(url, headers=headers)
@@ -131,6 +133,7 @@ def scrape(url):
     print("Created Json File")
 
     download_images(links=links)
+    # download_pdf(url)
 
 
 def scrape_tables(url):
@@ -155,22 +158,58 @@ def scrape_tables(url):
     except:
         print("No tables were found!")
 
-## Not working yet
 
 def download_images(links):
-    i = 1
 
+    i = 1
+   #Working ----------->         
     for link in links:
         image_url = link 
         save_name = f"Images/Test{i}.jpg"
         i+=1
         urllib.request.urlretrieve(image_url, save_name)
 
-def download_pdfs():
-    pass
+
+# def check_validity(my_url):
+#     try:
+#         urllib.request.urlopen(my_url)
+#         print("Valid URL")
+#     except IOError:
+#         print ("Invalid URL")
+#         sys.exit()
+
+
+# def download_pdfs(my_url):
+#     links = []
+#     html = requests.get(my_url, headers={'User-Agent': 'Mozilla/5.0'})
+#     html_page = BeautifulSoup(html.text, features="lxml") 
+#     og_url = html_page.find("meta",  property = "og:url")
+#     base = urlparse(my_url)
+#     print("base",base)
+#     for link in html_page.find_all('a'):
+#         current_link = link.get('href')
+#         if current_link.endswith('pdf'):
+#             if og_url:
+#                 print("currentLink",current_link)
+#                 links.append(og_url["content"] + current_link)
+#             else:
+#                 links.append(base.scheme + "://" + base.netloc + current_link)
+
+#     for link in links:
+#         try: 
+#             wget.download(link)
+#         except:
+#             print(" \n \n Unable to Download A File \n")
+#     print('\n')
+
+
+# def main():
+#     print("Enter Link: ")
+#     # my_url = input()
+#     check_validity(url)
+#     download_pdfs(url)
 
 scrape(url)
-# scrape_tables(url)
 
 
 
