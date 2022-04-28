@@ -30,9 +30,9 @@ import json, os, wget
 # from download_pdf import download_pdf
 
 contents = []
-url = "https://www.moneycontrol.com"
+# url = "https://www.moneycontrol.com"
 # url = "https://replit.org"
-# url = "https://www.codewithharry.com"
+url = "https://www.codewithharry.com"
 # url = "https://stackoverflow.com"
 # url = "https://www.geeksforgeeks.org"
 # url = "http://www.gatsby.ucl.ac.uk/teaching/courses/ml1-2016"
