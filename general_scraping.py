@@ -20,6 +20,7 @@
 #Working code
 from distutils.log import error
 from importlib.resources import path
+from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -172,6 +173,8 @@ def scrape_tables(url):
 ## Not working yet
 
 def download_images(url):
+
+    
     headers = {'Accept': 'text/html'}
     r = requests.get(url, headers=headers)
     htmlContent = r.content
@@ -189,12 +192,12 @@ def download_images(url):
 
     for link in links:
         image_url = link 
-        save_name = f"static/Images/Test{i}.jpg"
+        save_name = f"static/images/Test{i}.jpg"
         i+=1
-        urllib.request.urlretrieve(image_url, save_name)
-
-def download_pdfs():
-    pass
+        try:
+            urllib.request.urlretrieve(image_url, save_name)
+        except Exception as e:
+            print(e)
 
 # scrape(url)
 # scrape_tables(url)

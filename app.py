@@ -2,9 +2,21 @@ import os
 from certifi import contents
 from flask import Flask, render_template, request, json, jsonify
 import general_scraping as gs
+from download_pdf import download_pdfs
 # from general_scraping import contents
 
 app = Flask(__name__)
+
+path_for_images = "C:/Users/ASUS/Desktop/Cloudstrats/Web Scraping/web_scraping/static/images"
+
+def remove(path):
+    loc=os.listdir(path)
+    # print(loc)
+    if loc != []:
+        for p in loc:
+            os.remove(path + "/" + p)
+
+
 
 
 with open('content.json', 'r') as myfile:
@@ -39,17 +51,23 @@ def render():
         else:
             print("NO tables")
         if request.form.get("images"):
+
+            remove(path_for_images)
             gs.download_images(url)
-            img_list = os.listdir("static/Images")
+            my_contents = gs.contents
+            img_list = os.listdir("static/images")
 
             print(f"\n-------------------->\nimages : {img_list}\n")
-
+            # data.clear()
             data['images'] = img_list
             # return render_template("render.html", url=url)
         else:
             print("NO images")
         if request.form.get("PDF's"):
-            gs.download_pdfs(url)
+            download_pdfs(url)
+            my_contents = gs.contents
+
+            print(my_contents)
             # return render_template("render.html", url=url)
         else:
             print("NO pdfs")

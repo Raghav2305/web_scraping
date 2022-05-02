@@ -7,7 +7,7 @@
     <div class="row gx-2 gy-2">
         {% for image in data.images %}
         <div class="col-md-3">
-            <img src="{{url_for('static', filename='Images/')}}{{image}}" class="img-prev img-thumbnail"
+            <img src="{{url_for('static', filename='images/')}}{{image}}"
                 style="width: 200px">
         </div>
         {% endfor %}
@@ -29,7 +29,6 @@
           </tr>
         </thead>
         <tbody>
-            <var>i</var> = 1
           {% for content in contents %}
             {% for key,value in content.items() %}
           <tr>
@@ -39,7 +38,6 @@
             <td>{{value}}</td>
           </tr>
           {% endfor %}
-          <var> i</var> +=1
           {% endfor %}
           
           
