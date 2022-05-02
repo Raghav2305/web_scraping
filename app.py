@@ -7,7 +7,7 @@ from download_pdf import download_pdfs
 
 app = Flask(__name__)
 
-path_for_images = "C:/Users/ASUS/Desktop/Cloudstrats/Web Scraping/web_scraping/static/images"
+path_for_images = "C:/Users/ASUS/Desktop/Cloudstrats/Web Scraping/web_scraping/static/my_images"
 
 def remove(path):
     loc=os.listdir(path)
@@ -55,7 +55,7 @@ def render():
             remove(path_for_images)
             gs.download_images(url)
             my_contents = gs.contents
-            img_list = os.listdir("static/images")
+            img_list = os.listdir("static/my_images")
 
             print(f"\n-------------------->\nimages : {img_list}\n")
             # data.clear()

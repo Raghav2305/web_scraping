@@ -192,7 +192,7 @@ def download_images(url):
 
     for link in links:
         image_url = link 
-        save_name = f"static/images/Test{i}.jpg"
+        save_name = f"static/my_images/Test{i}.jpg"
         i+=1
         try:
             urllib.request.urlretrieve(image_url, save_name)

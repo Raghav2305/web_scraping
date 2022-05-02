@@ -7,7 +7,7 @@
     <div class="row gx-2 gy-2">
         {% for image in data.images %}
         <div class="col-md-3">
-            <img src="{{url_for('static', filename='images/')}}{{image}}"
+            <img src="{{url_for('static', filename='my_images/')}}{{image}}"
                 style="width: 200px">
         </div>
         {% endfor %}
