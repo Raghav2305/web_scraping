@@ -18,9 +18,15 @@
 # #     print(img)
 
 #Working code
+<<<<<<< HEAD
 import sys
 import urllib.request
 
+=======
+from distutils.log import error
+from importlib.resources import path
+from urllib.parse import urljoin
+>>>>>>> new
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -32,18 +38,20 @@ import json, os, wget
 contents = []
 # url = "https://www.moneycontrol.com"
 # url = "https://replit.org"
-url = "https://www.codewithharry.com"
+# url = "https://www.codewithharry.com"
 # url = "https://stackoverflow.com"
 # url = "https://www.geeksforgeeks.org"
 # url = "http://www.gatsby.ucl.ac.uk/teaching/courses/ml1-2016"
 # url = "https://www.infobooks.org/free-pdf-books/childrens/childrens-story-books"
 
-headers = {'Accept': 'text/html'}
-r = requests.get(url, headers=headers)
-htmlContent = r.content
-soup = BeautifulSoup(htmlContent, 'html.parser')
+
 
 def scrape(url):
+
+    headers = {'Accept': 'text/html'}
+    r = requests.get(url, headers=headers)
+    htmlContent = r.content
+    soup = BeautifulSoup(htmlContent, 'html.parser')
 ## Get Contents
 
     title = soup.title
@@ -84,7 +92,7 @@ def scrape(url):
         contents.append({"H2": h2s.text})
 ## Get Tables
     
-    scrape_tables(url)
+    # scrape_tables(url)
 
 ## Get Links
 
@@ -111,9 +119,10 @@ def scrape(url):
         print('----------------------------------------------')
 
 ## Get Images
-
+    
     image_tags = soup.find_all('img')
     links = []
+    links.clear()
     for image_tag in image_tags:
         
         if image_tag['src'].startswith("https://"):
@@ -127,16 +136,30 @@ def scrape(url):
 
     print('\033[1m' + "Images successfully scraped! " + '\033[0m', end='\n')
     
+    # with open('images.json', 'w') as f:
+    #     json.dump(contents, f, indent=8, ensure_ascii=False)
+
+    
     with open('content.json', 'w') as f:
         json.dump(contents, f, indent=8, ensure_ascii=False)
 
     print("Created Json File")
+    print(contents)
+    
 
+<<<<<<< HEAD
     download_images(links=links)
     # download_pdf(url)
+=======
+    # download_images(links=links)
+>>>>>>> new
 
 
 def scrape_tables(url):
+    headers = {'Accept': 'text/html'}
+    r = requests.get(url, headers=headers)
+    htmlContent = r.content
+    soup = BeautifulSoup(htmlContent, 'html.parser')
     try:
         scraped_table = soup.find_all('table')
         # pprint(scraped_table)
@@ -146,6 +169,7 @@ def scrape_tables(url):
         # html = get_url_content(url)
         table = HTMLTableParser()
         table.feed(str(scraped_table))
+        
         # my_table = pd.DataFrame(table.tables[1])
         # print(my_table, end="\n", sep="\n")
         print("\n\nPANDAS DATAFRAME\n")
@@ -159,16 +183,40 @@ def scrape_tables(url):
         print("No tables were found!")
 
 
+<<<<<<< HEAD
 def download_images(links):
+=======
+def download_images(url):
+
+    
+    headers = {'Accept': 'text/html'}
+    r = requests.get(url, headers=headers)
+    htmlContent = r.content
+    soup = BeautifulSoup(htmlContent, 'html.parser')
+    image_tags = soup.find_all('img')
+    links = []
+    for image_tag in image_tags:
+        
+        if image_tag['src'].startswith("https://"):
+            links.append(image_tag['src'])
+        else:
+            links.append(url + image_tag['src'])
+    
+    i = 1
+>>>>>>> new
 
     i = 1
    #Working ----------->         
     for link in links:
         image_url = link 
-        save_name = f"Images/Test{i}.jpg"
+        save_name = f"static/my_images/Test{i}.jpg"
         i+=1
-        urllib.request.urlretrieve(image_url, save_name)
+        try:
+            urllib.request.urlretrieve(image_url, save_name)
+        except Exception as e:
+            print(e)
 
+<<<<<<< HEAD
 
 # def check_validity(my_url):
 #     try:
@@ -210,6 +258,10 @@ def download_images(links):
 #     download_pdfs(url)
 
 scrape(url)
+=======
+# scrape(url)
+# scrape_tables(url)
+>>>>>>> new
 
 
 

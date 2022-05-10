@@ -1,0 +1,47 @@
+
+
+<div>
+    {% if data.images %}
+    <h5 class="p-3 my-3 bg-light text-center mb-5">images</h5>
+    <hr>
+    <div class="row gx-2 gy-2">
+        {% for image in data.images %}
+        <div class="col-md-3">
+            <img src="{{url_for('static', filename='my_images/')}}{{image}}"
+                style="width: 200px">
+        </div>
+        {% endfor %}
+                
+    </div>
+    <hr>
+    {% endif %}
+</div>
+
+{% if contents %}
+<div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">SR. NO</th>
+            <th scope="col">Key</th>
+            <th scope="col">Value</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for content in contents %}
+            {% for key,value in content.items() %}
+          <tr>
+            <th scope="row"></th>
+            <td>{{i}}</td>
+            <td>{{key}}</td>
+            <td>{{value}}</td>
+          </tr>
+          {% endfor %}
+          {% endfor %}
+          
+          
+        </tbody>
+      </table>
+</div>
+{% endif %}
