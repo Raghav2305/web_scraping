@@ -1,0 +1,22 @@
+{
+        "Title": "The collaborative browser based IDE - Replit",
+        "Paragraph": "Instant IDE",
+        "H1": "Code, create, and learn together",
+        "H2": "Use our free, collaborative, in-browser IDE to code in 50+ languages — without spending a second on setup.",
+        "Links": [],
+        "Images": [
+                "https://cms.replit.com/assets/workspace.png",
+                "https://cms.replit.com/assets/multiplayer-cursors.png",
+                "https://cms.replit.com/assets/community.png",
+                "https://cms.replit.com/assets/team.png",
+                "https://cms.replit.com/assets/hosting.png",
+                "https://cms.replit.com/assets/logos/google.svg",
+                "https://cms.replit.com/assets/logos/facebook.svg",
+                "https://cms.replit.com/assets/logos/stripe.svg",
+                "https://cms.replit.com/assets/logos/harvard.svg",
+                "https://cms.replit.com/assets/logos/berkeley.svg",
+                "https://cms.replit.com/assets/logos/hackreactor.svg",
+                "https://cms.replit.com/assets/logos/mit.svg",
+                "https://cms.replit.com/assets/logos/ga.svg"
+        ]
+}

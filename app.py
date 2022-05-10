@@ -77,7 +77,5 @@ def render():
     return render_template("render.html", data = data, contents = my_contents)
 
 if __name__=="__main__":
-    app.run(port=5000, debug=True)
-
-
-
+    app.run(port=5000, debug=True) 
+    
