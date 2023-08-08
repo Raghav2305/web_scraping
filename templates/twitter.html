@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+<head>
+  <script src="jquery-3.6.0.min.js"></script>
+  </head>
+  <script src="../static/javascript/twitter.js"></script>
+{% block title %}
+<title>SCRAPING ENGINE</title>
+
+{% endblock %} {% block body %}
+
+
+
+<main>
+
+    <div class="container">
+        <div class="row mb-5 pt-5">
+            <div class="col text-center">
+                <a class="navbar-brand" href="#">
+                    
+                </a>
+                <h2 class="mb-2 mt-4" style="font-weight: 700;"><b>TWITTER SCRAPING ENGINE</b></h2>
+                <h5></h5>
+            </div>
+        </div>
+        
+</main>
+
+<div id="parent" class="twitter_dropdown">
+  <div id="drop" class="twitter_dropdown">
+    <button
+      style="font-size: 15px ;"
+      class="btn btn-info dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Twitter Scraping
+    </button>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a id="key_id" value="Show key" onclick="showKeywords()"  class="dropdown-item"><b>Using Keyword</b></a>
+      <a id="name_id" value="Show user" onclick="showUsername()" class="dropdown-item"><b>Using Username</b></a>
+      <a id="hash_id" value="Show hash" onclick="showHashtag()" class="dropdown-item"><b>Using Hashtag</b></a>
+      <a id="query_id" value="Show query" onclick="showQuery()" class="dropdown-item"><b>All</b></a>
+    </div>
+      
+    
+    
+  </div>
+</div>
+
+
+      <form action="/scrape_keyword" id="keywords" style=" text-align: center; padding-top: 30px; display: none;" class="text-center" method="post">
+        <h5><b>Enter keywords:</b></h5>
+        <p><input required="required" type="text" id="test" name="my_keywords"></p><br>
+        <p style="padding-top:0px ;"><button type="submit" class="btn btn-success"> Scrape Content</button></p>
+        
+    </form>
+    
+    
+    
+      <form action="/my_usernames" id="username"  style="text-align: center; padding-top: 30px; display: none;" class="text-center" method="post">
+        <h5><b>Enter Username:</b></h5>
+        <p><input required="required" type="text" id="test" name="my_username"></p><br>
+        <p style="padding-top:0px ;"><button type="submit" class="btn btn-success"> Scrape Content</button></p>
+        
+    </form> 
+
+      <form action="/scrape_keyword" id="hashtag" style="text-align: center; padding-top: 30px; display: none;" class="text-center" method="post">
+        <h5><b>Enter Hashtags:</b></h5>
+        <p><input placeholder="Start with #" required="required" type="text" id="test" name="my_keywords"></p><br>
+        <p style="padding-top:0px ;"><button type="submit" class="btn btn-success"> Scrape Content</button></p>
+        
+    </form>
+    
+      <form action="/all_twitter" id="query" style="text-align: center; padding-top: 30px; display: none;" class="text-center" method="post">
+        <h5><b>Enter Keyword, hashtag or any username:</b></h5>
+        <p><input required="required" type="text" id="test" name="query"></p><br>
+        <p style="padding-top:0px ;"><button type="submit" class="btn btn-success"> Scrape Content</button></p>
+        
+    </form>
+
+<script>
+
+// $(document).ready(function(){
+//         $("select").change(function(){
+//             $( "select option:selected").each(function(){
+//                 if($(this).attr("value")=="Show key"){
+//                     $(".keywords").hide();
+//                     $(".Show key").show();
+//                 }
+//                 if($(this).attr("value")=="Show user"){
+//                     $(".username").hide();
+//                     $(".Show user").show();
+//                 }
+//                 if($(this).attr("value")=="Show hash"){
+//                     $(".hashtag").hide();
+//                     $(".Show hash").show();
+//                 }
+//                 if($(this).attr("value")=="Show query"){
+//                     $(".query").hide();
+//                     $(".Show query").show();
+//                 }
+//             });
+//         }).change();
+//     });
+    
+     function showKeywords() {
+        document.getElementById('keywords').style.display = "block";
+     }
+     function showUsername() {
+        document.getElementById('username').style.display = "block";
+     }
+     function showHashtag() {
+        document.getElementById('hashtag').style.display = "block";
+     }
+     function showQuery() {
+        document.getElementById('query').style.display = "block";
+     }
+</script> 
+
+    
+
+{% endblock %}
